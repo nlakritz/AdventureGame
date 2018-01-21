@@ -3,7 +3,9 @@ import java.util.ArrayList;
 public class Character {
 	private String name;
 	private int health;
+	private int maxhealth;
 	private String hand = "";
+	private boolean alive = true;
 	ArrayList<String> pack = new ArrayList<String>(10);
 	
 	public void setName(String playerName) {
@@ -26,9 +28,16 @@ public class Character {
 		System.out.println("You are currently at " + health);
 	}
 	
+	public void increaseHealth(int hearts) {
+		for (int i = hearts; (i > 0) && (health < maxhealth); i--) {
+			health++;
+		}
+	}
+	
 	public void decreaseHealth(int damage) {
 		health -= damage;
 		if (health <= 0)
+			alive = false;
 			System.out.println("Sorry you have died"); // Maybe have a revive potion option.
 	}
 	
@@ -56,10 +65,11 @@ public class Character {
 		if (hand.equals("")) {
 			hand = "[nothing]";
 		}
-		return "Detective has " + health + " health left and is holding " + hand;
+		return "You have " + health + " health left and are holding " + hand + ".";
 	}
 	
 	public Character() {
+		maxhealth = 10;
 		health = 10;
 		pack.add("Bandage"); // Gives +1 health
 		pack.add("Flash Light"); // Some rooms are dark, so first need to equip flashlight to see room. Maybe to find a key or something else.
