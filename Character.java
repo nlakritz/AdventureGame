@@ -16,10 +16,6 @@ public class Character {
 		return name;
 	}
 	
-	public void displayName() {
-		System.out.println("Your name is " + name);
-	}
-	
 	public int getHealth() {
 		return health;
 	}
