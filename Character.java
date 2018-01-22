@@ -56,19 +56,19 @@ public class Character {
 			System.out.println("You have used [Bandage] to recover 1 HP.");
 			increaseHealth(1);
 			drop("Bandage"); // Consumable items must be removed from inventory after use.
-			hand = "Nothing"; 
+			hand = temp;
 		}
 		else if (hand.equals("Stew")) {
 			System.out.println("You have used [Stew] to recover 3 HP.");
 			increaseHealth(3);
 			drop("Stew");
-			hand = "Nothing";
+			hand = temp;
 		}
 		else if (hand.equals("Super Healing Potion")) {
 			System.out.println("You have used [Super Healing Potion] to recover all HP.");
 			health = maxhealth;
 			drop("Super Healing Potion");
-			hand = "Nothing";
+			hand = temp;
 		}
 	}
 	
@@ -80,6 +80,6 @@ public class Character {
 		maxhealth = 10;
 		health = 10;
 		pack.add("Bandage");
-		pack.add("Flash Light");
+		pack.add("Flashlight");
 	}
 }
