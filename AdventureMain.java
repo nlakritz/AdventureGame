@@ -10,7 +10,8 @@ public class AdventureMain {
 		Character player = new Character();
 		System.out.print("What is your name? ");
 		player.setName(userInput.nextLine());
-		System.out.println("\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
+		System.out.println(
+				"\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
 		entrance();
 		// player.pack = stack_game(player.pack);
 		userInput.close();
@@ -24,7 +25,7 @@ public class AdventureMain {
 		choice = userInput.nextInt();
 
 		if (choice == 1) {
-//			lobby();
+			// lobby();
 		} else if (choice == 2) {
 			endgame();
 		} else {
@@ -32,6 +33,51 @@ public class AdventureMain {
 			entrance();
 		}
 	}
+
+	public static void lobby() {
+		System.out.println("You now see three doors in the lobby, which one do you choose to enter");
+		System.out.println("1: Enter the door to your left");
+		System.out.println("2: Enter the door in front of you");
+		System.out.println("3: Enter the door to your right");
+		choice = scan.nextInt();
+		if (choice == 1) {
+			leftDoor();
+		} else if (choice == 2) {
+			middleDoor();
+		} else if (choice == 3) {
+			rightDoor();
+		} else {
+			System.out.println("You have not entered a valid choice");
+			lobby();
+		}
+	}
+
+	public static void leftDoor() {
+		monster jam = new monster();
+		System.out.println(" You have encountered a monster. It attacks you tearing off your shirt");
+		panish.decreaseHealth(1);
+		System.out.println("1: attack monster");
+		System.out.println("2: Run past monster to the door behind it");
+		if (choice == 1) {
+			jam.health = attackMonster(panish.hand, jam.health);
+		} else if (choice == 2) {
+			System.out.println(" As you run pass the monster it swipes at you gashing you back");
+			panish.decreaseHealth(3);
+			nextDoor();
+		} else {
+			System.out.println("You have not entered a valid choice");
+			leftDoor();
+		}
+	}
+
+	public static int attackMonster(String weapon, int health) {
+		if (weapon.equals("pen")) {
+			health -= 1;
+		}
+		System.out.println("You have cut off the monsters arm and done 1 damage");
+		return health;
+	}
+
 	public static void endgame() {
 		System.out.println("You have abandoned your mission. GAME OVER.");
 	}
