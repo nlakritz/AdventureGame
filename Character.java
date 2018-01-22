@@ -5,7 +5,6 @@ public class Character {
 	private int health;
 	private int maxhealth;
 	private String hand = "Nothing";
-	private boolean alive = true;
 	ArrayList<String> pack = new ArrayList<String>(10);
 	
 	public void setName(String playerName) {
@@ -29,7 +28,6 @@ public class Character {
 	public void decreaseHealth(int damage) {
 		health -= damage;
 		if (health <= 0) {
-			alive = false;
 			System.out.println("Sorry, you have died."); // Maybe have a revive potion option.
 		}
 	}
@@ -80,6 +78,17 @@ public class Character {
 	
 	public void status() {
 		System.out.println("You have " + health + " health left and are holding [" + hand + "].");
+	}
+	
+	public void death() {
+		for (String iterate : pack) {
+			if (iterate.equals("Kiss of Life")) {
+				System.out.println("You have a revive item. Use it? (Y/N)");
+			}
+			else {
+				System.out.println("You have died. GAME OVER.");
+			}
+		}
 	}
 	
 	public Character() {
