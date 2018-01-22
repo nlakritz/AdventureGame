@@ -8,6 +8,8 @@ public class AdventureMain {
 		userInput.nextLine();
 		Character player = new Character();
 		System.out.print("What is your name? ");
-		player.setName(userInput.next());
+		player.setName(userInput.nextLine());
+		
+		userInput.close();
 	}
 }
