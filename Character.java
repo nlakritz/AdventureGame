@@ -4,7 +4,7 @@ public class Character {
 	private String name;
 	private int health;
 	private int maxhealth;
-	private String hand = "";
+	private String hand = "Nothing";
 	private boolean alive = true;
 	ArrayList<String> pack = new ArrayList<String>(10);
 	
@@ -19,12 +19,8 @@ public class Character {
 	public int getHealth() {
 		return health;
 	}
-
-	public void displayHealth() {
-		System.out.println("You are currently at " + health);
-	}
 	
-	public void increaseHealth(int hearts) {
+	private void increaseHealth(int hearts) {
 		for (int i = hearts; (i > 0) && (health < maxhealth); i--) {
 			health++;
 		}
@@ -32,9 +28,10 @@ public class Character {
 	
 	public void decreaseHealth(int damage) {
 		health -= damage;
-		if (health <= 0)
+		if (health <= 0) {
 			alive = false;
-			System.out.println("Sorry you have died"); // Maybe have a revive potion option.
+			System.out.println("Sorry, you have died."); // Maybe have a revive potion option.
+		}
 	}
 	
 	public void pickup(String item) {
@@ -55,19 +52,34 @@ public class Character {
 		if (hand.equals(temp)) {
 			System.out.println("You have not entered a valid item.");
 		}
+		else if (hand.equals("Bandage")) {
+			System.out.println("You have used [Bandage] to recover 1 HP.");
+			increaseHealth(1);
+			drop("Bandage"); // Consumable items must be removed from inventory after use.
+			hand = "Nothing"; 
+		}
+		else if (hand.equals("Stew")) {
+			System.out.println("You have used [Stew] to recover 3 HP.");
+			increaseHealth(3);
+			drop("Stew");
+			hand = "Nothing";
+		}
+		else if (hand.equals("Super Healing Potion")) {
+			System.out.println("You have used [Super Healing Potion] to recover all HP.");
+			health = maxhealth;
+			drop("Super Healing Potion");
+			hand = "Nothing";
+		}
 	}
 	
-	public String status() {
-		if (hand.equals("")) {
-			hand = "[nothing]";
-		}
-		return "You have " + health + " health left and are holding " + hand + ".";
+	public void status() {
+		System.out.println("You have " + health + " health left and are holding [" + hand + "].");
 	}
 	
 	public Character() {
 		maxhealth = 10;
 		health = 10;
-		pack.add("Bandage"); // Gives +1 health
-		pack.add("Flash Light"); // Some rooms are dark, so first need to equip flashlight to see room. Maybe to find a key or something else.
+		pack.add("Bandage");
+		pack.add("Flash Light");
 	}
 }
