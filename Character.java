@@ -43,32 +43,38 @@ public class Character {
 	}
 	
 	public void equip(String object) {
-		String temp = hand;
-		for (String iterate : pack) {
-			if (object.equals(iterate)) {
-				hand = object;
+		if (hand.equals(object)) {
+			System.out.println("You already have [" + object + "] equipped.");
+		}
+		else {
+			String temp = hand;
+			for (String iterate : pack) {
+				if (object.equals(iterate)) {
+					hand = object;
+				}
 			}
-		}
-		if (hand.equals(temp)) {
-			System.out.println("You have not entered a valid item.");
-		}
-		else if (hand.equals("Bandage")) {
-			System.out.println("You have used [Bandage] to recover 1 HP.");
-			increaseHealth(1);
-			drop("Bandage"); // Consumable items must be removed from inventory after use.
-			hand = temp;
-		}
-		else if (hand.equals("Stew")) {
-			System.out.println("You have used [Stew] to recover 3 HP.");
-			increaseHealth(3);
-			drop("Stew");
-			hand = temp;
-		}
-		else if (hand.equals("Super Healing Potion")) {
-			System.out.println("You have used [Super Healing Potion] to recover all HP.");
-			health = maxhealth;
-			drop("Super Healing Potion");
-			hand = temp;
+			if (hand.equals(temp)) {
+				System.out.println("You have not entered a valid item.");
+			}
+				
+			else if (hand.equals("Bandage")) {
+				System.out.println("You have used [Bandage] to recover 1 HP.");
+				increaseHealth(1);
+				drop("Bandage"); // Consumable items must be removed from inventory after use.
+				hand = temp;
+			}
+			else if (hand.equals("Stew")) {
+				System.out.println("You have used [Stew] to recover 3 HP.");
+				increaseHealth(3);
+				drop("Stew");
+				hand = temp;
+			}
+			else if (hand.equals("Super Healing Potion")) {
+				System.out.println("You have used [Super Healing Potion] to recover all HP.");
+				health = maxhealth;
+				drop("Super Healing Potion");
+				hand = temp;
+			}
 		}
 	}
 	
