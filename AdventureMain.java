@@ -1,42 +1,39 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class AdventureMain {
-	static Scanner scan = new Scanner(System.in);
+	static Scanner userInput = new Scanner(System.in);
 	public static int choice;
-	public static Character panish;
 
 	public static void main(String[] args) {
-		System.out.println(
-				"Game has begun. You are a detective contracted by the Queen of England to find her daughter that has gotten lost in a haunted mansion.");
-		System.out.print("WELCOME TO THE DANK DUNGEON, PRESS ENTER TO BEGIN.");
-		scan.nextLine();
-		panish = new Character();
+		System.out.print("WELCOME, PRESS ENTER TO BEGIN.");
+		userInput.nextLine();
+		Character player = new Character();
 		System.out.print("What is your name? ");
-		panish.setName(scan.next());
+		player.setName(userInput.nextLine());
+		System.out.println("\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
 		entrance();
-		// panish.pack = stack_game(panish.pack);
+		// player.pack = stack_game(player.pack);
+		userInput.close();
 	}
 
 	public static void entrance() {
-		System.out.println("You have arrived at the haunted mansion's entrance.");
+		System.out.println("You have arrived at the entrance of the haunted mansion.");
 		System.out.println("1: Enter mansion through front gate");
 		System.out.println("2: Leave");
 
-		choice = scan.nextInt();
+		choice = userInput.nextInt();
 
 		if (choice == 1) {
 //			lobby();
 		} else if (choice == 2) {
 			endgame();
 		} else {
-			System.out.println("You have not entered a valid choice");
+			System.out.println("You have not entered a valid choice, please try again.");
 			entrance();
 		}
 	}
 	public static void endgame() {
-		System.out.println("You have abandoned your mission. Game Over");
+		System.out.println("You have abandoned your mission. GAME OVER.");
 	}
 
 	public static ArrayList<String> stack_game(ArrayList<String> jam) {
@@ -48,8 +45,8 @@ public class AdventureMain {
 		System.out.println("To place block type place (item)");
 
 		Stack puzzle = new Stack();
-		while (scan.hasNextLine()) {
-			String item = scan.nextLine();
+		while (userInput.hasNextLine()) {
+			String item = userInput.nextLine();
 			if (!jam.contains(item) && !item.equals("q")) {
 				System.out.println("You don't have this item");
 				continue;
