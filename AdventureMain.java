@@ -43,9 +43,9 @@ public class AdventureMain {
 		if (choice == 1) {
 			leftDoor();
 		} else if (choice == 2) {
-			//middleDoor();
+			// middleDoor();
 		} else if (choice == 3) {
-			//rightDoor();
+			// rightDoor();
 		} else {
 			System.out.println("You have not entered a valid choice");
 			lobby();
@@ -53,28 +53,40 @@ public class AdventureMain {
 	}
 
 	public static void leftDoor() {
-		monster jam = new monster();
+		Monster jam = new Monster();
 		System.out.println("You have encountered a monster. It attacks you, tearing off your shirt.");
 		player.decreaseHealth(1);
 		System.out.println("1: Attack monster");
 		System.out.println("2: Run past monster to the door behind it");
+		choice = userInput.nextInt();
 		if (choice == 1) {
-			jam.health = attackMonster(player.getHand(), jam.health);
+			while (jam.checkLife()) {
+				if (choice == 1) {
+					jam.setHealth(attackMonster(player.getHand(), jam.getHealth(), jam.bodyPart()));
+					System.out.println("The monster has " + jam.getHealth() +" health left" );
+					player.decreaseHealth(1);
+				}
+			}
 		} else if (choice == 2) {
 			System.out.println(" As you run pass the monster it swipes at you gashing you back");
 			player.decreaseHealth(3);
-			//nextDoor();
+			// nextDoor();
 		} else {
 			System.out.println("You have not entered a valid choice");
 			leftDoor();
 		}
+		System.out.println("The monster has dropped a blue key");
+		System.out.println("You have acquired a blue key and now proceed through the door");
+		player.pickup("blue key");
+		
 	}
 
-	public static int attackMonster(String weapon, int health) {
-		if (weapon.equals("pen")) {
+
+	public static int attackMonster(String weapon, int health, String description) {
+		if (weapon.equals("Nothing")) {
 			health -= 1;
 		}
-		System.out.println("You have cut off the monsters arm and done 1 damage");
+		System.out.println("You have cut off the monsters " + description + " and done 1 damage");
 		return health;
 	}
 
