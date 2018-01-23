@@ -1,5 +1,3 @@
-package game;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -30,36 +28,35 @@ public class Monster {
 	}
 	
 	public String bodyPart() {
-		Random rand = new Random();
+		int num = (int) (Math.random() * 8); 
 		String part = "";
-		int num = rand.nextInt(8) +1;
-		if(arr.contains(num)) {  // not working for some reason. Trying to get all the num so i dont repeat
-			bodyPart();
+		while (arr.contains(num)) {  // not working for some reason. Trying to get all the num so i dont repeat
+			num = (int) (Math.random() * 8); 
 		}
 		arr.add(num);
 		
-		if(num == 1) {
+		if(num == 0) {
 			part = "left leg";
 			return part;
-		} else if(num == 2) {
+		} else if(num == 1) {
 			part= "right leg";
 			return part;
-		} else if(num == 3) {
+		} else if(num == 2) {
 			part = "left arm";
 			return part;
-		} else if(num == 4) {
+		} else if(num == 3) {
 			part = "right arm";
 			return part;
-		} else if(num == 5) {
+		} else if(num == 4) {
 			part = "tail";
 			return part;
-		} else if(num == 6) {
+		} else if(num == 5) {
 			part = "left head";
 			return part;
-		} else if(num == 7) {
+		} else if(num == 6) {
 			part = "middle head";
 			return part;
-		} else if(num == 8) {
+		} else if(num == 7) {
 			part = "right head";
 			return part;
 		}
