@@ -10,7 +10,8 @@ public class AdventureMain {
 		userInput.nextLine();
 		System.out.print("What is your name? ");
 		player.setName(userInput.nextLine());
-		System.out.println("\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
+		System.out.println(
+				"\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
 		entrance();
 		userInput.close();
 	}
@@ -41,11 +42,11 @@ public class AdventureMain {
 		if (choice == 1) {
 			a1();
 		} else if (choice == 2) {
-			// a2();
+			a2();
 		} else if (choice == 3) {
 			// a3();
 		} else {
-			System.out.println("You have not entered a valid choice");
+			System.out.println("You have not entered a valid choice, please try again.");
 			lobby();
 		}
 	}
@@ -61,24 +62,48 @@ public class AdventureMain {
 			while (jam.checkLife()) {
 				if (choice == 1) {
 					jam.setHealth(attackMonster(player.getHand(), jam.getHealth(), jam.bodyPart()));
-					System.out.println("The monster has " + jam.getHealth() +" health left" );
+					System.out.println("The monster has " + jam.getHealth() + " health left");
 					player.decreaseHealth(1);
 				}
 			}
 		} else if (choice == 2) {
-			System.out.println(" As you run pass the monster it swipes at you gashing you back");
+			System.out.println("As you run pass the monster it swipes at you, gashing your back.");
 			player.decreaseHealth(3);
 			// b1();
 		} else {
-			System.out.println("You have not entered a valid choice");
+			System.out.println("You have not entered a valid choice, please try again.");
 			a1();
 		}
-		System.out.println("The monster has dropped a blue key");
-		System.out.println("You have acquired a blue key and now proceed through the door");
+		System.out.println("The monster has dropped a blue key!");
+		System.out.println("You have acquired a blue key and now proceed through the door...");
 		player.pickup("blue key");
-		
 	}
 
+	public static void a2() {
+		System.out.println(
+				"You enter a musty storage room. There are two cardboard boxes on the ground, both sealed with tape.");
+		System.out.println("The left box is labeled [WEAPONS] and right box is labeled [FOOD]. Which do you open?");
+		System.out.println("1: Open the left box");
+		System.out.println("2: Open the right box");
+		choice = userInput.nextInt();
+		if (choice == 1) {
+			System.out.println(
+					"As you approach the mysterious box, you hear the ground creak. You open the box and find a butter knife. \nJust as you pocket your loot, the floor suddenly caves in and you fall into a pile of wood chips.");
+			player.decreaseHealth(2);
+			player.pickup("Butter Knife");
+			System.out.println("Obtained +1 Butter Knife!");
+			} else if (choice == 2) {
+			System.out.println(
+					"As you approach the mysterious box, you hear the ground creak. You open the box and find a bowl of fresh stew. \nJust as you pick up your loot, the floor caves in and you fall into a pile of wood chips.");
+			player.decreaseHealth(2);
+			player.pickup("Stew");
+			System.out.println("Obtained +1 Stew!");
+		} else {
+			System.out.println("You have not entered a valid choice, please try again.");
+			a2();
+		}
+		// b2();
+	}
 
 	public static int attackMonster(String weapon, int health, String description) {
 		if (weapon.equals("Nothing")) {
