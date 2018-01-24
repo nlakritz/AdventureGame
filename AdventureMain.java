@@ -52,7 +52,7 @@ public class AdventureMain {
 	}
 
 	public static void a1() {
-		Monster jam = new Monster();
+		Monster jam = new Monster(5);
 		System.out.println("You have encountered a monster. It attacks you, tearing off your shirt.");
 		player.decreaseHealth(1);
 		System.out.println("1: Attack monster");
@@ -62,7 +62,12 @@ public class AdventureMain {
 			while (jam.checkLife()) {
 				if (choice == 1) {
 					jam.setHealth(attackMonster(player.getHand(), jam.getHealth(), jam.bodyPart()));
-					System.out.println("The monster has " + jam.getHealth() + " health left");
+					if (jam.getHealth() > 0) {
+						System.out.println("The monster has " + jam.getHealth() + " health left");
+					}
+					else {
+						System.out.println("The monster has 0 health left");
+					}
 					player.decreaseHealth(1);
 				}
 			}
@@ -106,10 +111,29 @@ public class AdventureMain {
 	}
 
 	public static int attackMonster(String weapon, int health, String description) {
+		int damage = 0;
 		if (weapon.equals("Nothing")) {
-			health -= 1;
+			if (description.equals("left head") || description.equals("middle head") || description.equals("right head")) {
+				damage = 2;
+				health -= 2;
+			}
+			else {
+				damage = 1;
+				health -= 1;
+			}
 		}
-		System.out.println("You have cut off the monsters " + description + " and done 1 damage");
+		else if (weapon.equals("Butter Knife")) {
+			if (description.equals("left head") || description.equals("middle head") || description.equals("right head")) {
+				damage = 3;
+				health -= 3;
+			}
+			else {
+				damage = 2;
+				health -= 2;
+			}
+		}
+
+		System.out.println("You have cut off the monsters " + description + " and done " + damage + " damage");
 		return health;
 	}
 

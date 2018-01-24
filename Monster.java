@@ -9,6 +9,10 @@ public class Monster {
 	public Monster() {
 		health = 3;
 	}
+	
+	public Monster(int health) {
+		this.health = health;
+	}
 
 	public boolean checkLife() {
 		if (health <= 0) {
