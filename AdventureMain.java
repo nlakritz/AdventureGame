@@ -10,10 +10,8 @@ public class AdventureMain {
 		userInput.nextLine();
 		System.out.print("What is your name? ");
 		player.setName(userInput.nextLine());
-		System.out.println(
-				"\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
+		System.out.println("\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
 		entrance();
-		// player.pack = stack_game(player.pack);
 		userInput.close();
 	}
 
@@ -35,24 +33,24 @@ public class AdventureMain {
 	}
 
 	public static void lobby() {
-		System.out.println("You now see three doors in the lobby, which one do you choose to enter");
+		System.out.println("You now see three doors in the lobby, which one do you choose to enter?");
 		System.out.println("1: Enter the door to your left");
 		System.out.println("2: Enter the door in front of you");
 		System.out.println("3: Enter the door to your right");
 		choice = userInput.nextInt();
 		if (choice == 1) {
-			leftDoor();
+			a1();
 		} else if (choice == 2) {
-			// middleDoor();
+			// a2();
 		} else if (choice == 3) {
-			// rightDoor();
+			// a3();
 		} else {
 			System.out.println("You have not entered a valid choice");
 			lobby();
 		}
 	}
 
-	public static void leftDoor() {
+	public static void a1() {
 		Monster jam = new Monster();
 		System.out.println("You have encountered a monster. It attacks you, tearing off your shirt.");
 		player.decreaseHealth(1);
@@ -70,10 +68,10 @@ public class AdventureMain {
 		} else if (choice == 2) {
 			System.out.println(" As you run pass the monster it swipes at you gashing you back");
 			player.decreaseHealth(3);
-			// nextDoor();
+			// b1();
 		} else {
 			System.out.println("You have not entered a valid choice");
-			leftDoor();
+			a1();
 		}
 		System.out.println("The monster has dropped a blue key");
 		System.out.println("You have acquired a blue key and now proceed through the door");
