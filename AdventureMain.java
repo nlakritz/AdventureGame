@@ -52,7 +52,7 @@ public class AdventureMain {
 	}
 
 	public static void a1() {
-		Monster jam = new Monster(5);
+		Monster jam = new Monster(4);
 		System.out.println("You have encountered a monster. It attacks you, tearing off your shirt.");
 		player.decreaseHealth(1);
 		System.out.println("1: Attack monster");
@@ -65,7 +65,7 @@ public class AdventureMain {
 					if (jam.getHealth() > 0) {
 						System.out.println("The monster has " + jam.getHealth() + " health left");
 					} else {
-						System.out.println("The monster has 0 health left");
+						System.out.println("The monster has 0 health left\n");
 					}
 					player.decreaseHealth(1);
 				}
@@ -73,7 +73,6 @@ public class AdventureMain {
 		} else if (choice == 2) {
 			System.out.println("As you run pass the monster it swipes at you, gashing your back.");
 			player.decreaseHealth(3);
-			// b1();
 		} else {
 			System.out.println("You have not entered a valid choice, please try again.");
 			a1();
@@ -81,6 +80,7 @@ public class AdventureMain {
 		System.out.println("The monster has dropped a blue key!");
 		System.out.println("You have acquired a blue key and now proceed through the door...");
 		player.pickup("blue key");
+		// b1()
 	}
 
 	public static void a2() {
@@ -96,13 +96,13 @@ public class AdventureMain {
 					"As you approach the mysterious box, you hear the ground creak. You open the box and find a butter knife. \nJust as you pocket your loot, the floor suddenly caves in and you fall into a pile of wood chips.");
 			player.decreaseHealth(2);
 			player.pickup("Butter Knife");
-			System.out.println("Obtained +1 Butter Knife!");
+			System.out.println("Obtained +1 Butter Knife!\n");
 		} else if (choice == 2) {
 			System.out.println(
 					"As you approach the mysterious box, you hear the ground creak. You open the box and find a bowl of fresh stew. \nJust as you pick up your loot, the floor caves in and you fall into a pile of wood chips.");
 			player.decreaseHealth(2);
 			player.pickup("Stew");
-			System.out.println("Obtained +1 Stew!");
+			System.out.println("Obtained +1 Stew!\n");
 		} else if (choice == 3) {
 			System.out.println(
 					"The room appears to be a dead end. It's empty other than the two mysterious boxes laid before you.\n");
@@ -111,7 +111,44 @@ public class AdventureMain {
 			System.out.println("You have not entered a valid choice, please try again.");
 			a2();
 		}
-		// b2();
+		b2();
+	}
+
+	public static void b2() {
+		Monster speedy = new Monster(4);
+		int escape = (int) (Math.random() * 3);
+		System.out.println(
+				"Dazed and slightly injured, you slowly get up. A large monster watches from a distance, awaiting your arrival.");
+		System.out.println("It growls and suddenly rushes toward you at lightning speed! It's a trap!");
+		System.out.println("1: Defend yourself in combat");
+		System.out.println("2: Attempt to dodge the attack and rush for the exit");
+		choice = userInput.nextInt();
+		if (choice == 1) {
+			while (speedy.checkLife()) {
+				if (choice == 1) {
+					speedy.setHealth(attackMonster(player.getHand(), speedy.getHealth(), speedy.bodyPart()));
+					if (speedy.getHealth() > 0) {
+						System.out.println("The monster has " + speedy.getHealth() + " health left");
+					} else {
+						System.out.println("The monster has 0 health left");
+					}
+					player.decreaseHealth(1);
+				}
+			}
+		} else if (choice == 2) {
+			if (escape == 2) {
+				System.out.println("You successfully evade the monster's attack and escape completely unharmed.");
+			} else {
+				System.out.println(
+						"The monster lands a flurry of direct blows, yet you somehow manage to squirm over to the exit and escape.");
+				player.decreaseHealth(4);
+			}
+		} else {
+			System.out.println("You have not entered a valid choice, please try again.\n");
+			b2();
+		}
+		System.out.println("On the way out, you manage to strip the monster of a red key. It looks useful.");
+		player.pickup("red key");
 	}
 
 	public static int attackMonster(String weapon, int health, String description) {
