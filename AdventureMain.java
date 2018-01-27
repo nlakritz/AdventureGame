@@ -64,8 +64,7 @@ public class AdventureMain {
 					jam.setHealth(attackMonster(player.getHand(), jam.getHealth(), jam.bodyPart()));
 					if (jam.getHealth() > 0) {
 						System.out.println("The monster has " + jam.getHealth() + " health left");
-					}
-					else {
+					} else {
 						System.out.println("The monster has 0 health left");
 					}
 					player.decreaseHealth(1);
@@ -90,6 +89,7 @@ public class AdventureMain {
 		System.out.println("The left box is labeled [WEAPONS] and right box is labeled [FOOD]. Which do you open?");
 		System.out.println("1: Open the left box");
 		System.out.println("2: Open the right box");
+		System.out.println("3: Look around");
 		choice = userInput.nextInt();
 		if (choice == 1) {
 			System.out.println(
@@ -97,12 +97,16 @@ public class AdventureMain {
 			player.decreaseHealth(2);
 			player.pickup("Butter Knife");
 			System.out.println("Obtained +1 Butter Knife!");
-			} else if (choice == 2) {
+		} else if (choice == 2) {
 			System.out.println(
 					"As you approach the mysterious box, you hear the ground creak. You open the box and find a bowl of fresh stew. \nJust as you pick up your loot, the floor caves in and you fall into a pile of wood chips.");
 			player.decreaseHealth(2);
 			player.pickup("Stew");
 			System.out.println("Obtained +1 Stew!");
+		} else if (choice == 3) {
+			System.out.println(
+					"The room appears to be a dead end. It's empty other than the two mysterious boxes laid before you.\n");
+			a2();
 		} else {
 			System.out.println("You have not entered a valid choice, please try again.");
 			a2();
@@ -113,21 +117,20 @@ public class AdventureMain {
 	public static int attackMonster(String weapon, int health, String description) {
 		int damage = 0;
 		if (weapon.equals("Nothing")) {
-			if (description.equals("left head") || description.equals("middle head") || description.equals("right head")) {
+			if (description.equals("left head") || description.equals("middle head")
+					|| description.equals("right head")) {
 				damage = 2;
 				health -= 2;
-			}
-			else {
+			} else {
 				damage = 1;
 				health -= 1;
 			}
-		}
-		else if (weapon.equals("Butter Knife")) {
-			if (description.equals("left head") || description.equals("middle head") || description.equals("right head")) {
+		} else if (weapon.equals("Butter Knife")) {
+			if (description.equals("left head") || description.equals("middle head")
+					|| description.equals("right head")) {
 				damage = 3;
 				health -= 3;
-			}
-			else {
+			} else {
 				damage = 2;
 				health -= 2;
 			}
