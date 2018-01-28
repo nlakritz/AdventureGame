@@ -3,7 +3,7 @@ import java.util.*;
 public class AdventureMain {
 	static Scanner userInput = new Scanner(System.in);
 	static Character player = new Character();
-	public static int choice;
+	static int choice;
 
 	public static void main(String[] args) {
 		System.out.print("WELCOME, PRESS ENTER TO BEGIN.");
@@ -11,7 +11,7 @@ public class AdventureMain {
 		System.out.print("What is your name? ");
 		player.setName(userInput.nextLine());
 		System.out.println(
-				"\nGame has begun. You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
+				"\nGame has begun! You are a detective contracted by the Queen of England to find her daughter who has gotten lost in a haunted mansion.\n");
 		entrance();
 		userInput.close();
 	}
@@ -20,13 +20,11 @@ public class AdventureMain {
 		System.out.println("You have arrived at the entrance of the haunted mansion.");
 		System.out.println("1: Enter mansion through front gate");
 		System.out.println("2: Leave");
-
 		choice = userInput.nextInt();
-
 		if (choice == 1) {
 			lobby();
 		} else if (choice == 2) {
-			endgame();
+			System.out.println("You have abandoned your mission. GAME OVER.");
 		} else {
 			System.out.println("You have not entered a valid choice, please try again.");
 			entrance();
@@ -175,10 +173,6 @@ public class AdventureMain {
 
 		System.out.println("You have cut off the monsters " + description + " and done " + damage + " damage");
 		return health;
-	}
-
-	public static void endgame() {
-		System.out.println("You have abandoned your mission. GAME OVER.");
 	}
 
 	public static ArrayList<String> stack_game(ArrayList<String> jam) {
