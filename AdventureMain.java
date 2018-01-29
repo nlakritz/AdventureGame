@@ -209,4 +209,20 @@ public class AdventureMain {
 		}
 		return jam;
 	}
+	
+	public static int intCheck(int options) {
+		int selection;
+		do {
+		    while (!userInput.hasNextInt()) {
+		        System.out.println("Please enter an integer value.");
+		        userInput.nextLine(); 
+		    }
+		    selection = userInput.nextInt();
+		    if (selection > options || selection < 1) {
+		    	System.out.println("Please enter a valid choice.");
+		    	userInput.nextLine(); 
+		    }
+		} while (selection > options || selection < 1);
+		return selection;
+	}
 }
