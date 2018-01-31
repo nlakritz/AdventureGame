@@ -172,6 +172,15 @@ public class AdventureMain {
 				damage = 2;
 				health -= 2;
 			}
+		} else if (weapon.equals("Axe")) {
+			if (description.equals("left head") || description.equals("middle head")
+					|| description.equals("right head")) {
+				damage = 4;
+				health -= 4;
+			} else {
+				damage = 3;
+				health -= 3;
+			}
 		}
 		System.out.println("You have cut off the monsters " + description + " and done " + damage + " damage");
 		return health;
