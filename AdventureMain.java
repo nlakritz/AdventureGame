@@ -39,7 +39,7 @@ public class AdventureMain {
 		} else if (choice == 2) {
 			a2();
 		} else if (choice == 3) {
-			// a3();
+			a3();
 		}
 	}
 
@@ -100,6 +100,24 @@ public class AdventureMain {
 		b2();
 	}
 
+	public static void a3() {
+		System.out.println(
+				"You survey a large hallway -- its walls are lined with aging artifacts.\nA rusty hatchet stands out among rows of old ornaments and documents.");
+		System.out.println("1: Take the axe");
+		System.out.println("2: Look around");
+		choice = intCheck(2);
+		if (choice == 1) {
+			player.pickup("Axe");
+			System.out.println("The axe is light and sharp. Although old, it should come in handy. Obtained +1 Axe!");
+			System.out.println("You head for the exit with your new choice of weapon.\n");
+			// b3();
+		}
+		else if (choice == 2) {
+			System.out.println("Any of the items could probably be sold for a nice profit, but you have a mission to complete...\n");
+			a3();
+		}
+	}
+
 	public static void b2() {
 		Monster speedy = new Monster(4);
 		int escape = (int) (Math.random() * 3);
@@ -155,7 +173,6 @@ public class AdventureMain {
 				health -= 2;
 			}
 		}
-
 		System.out.println("You have cut off the monsters " + description + " and done " + damage + " damage");
 		return health;
 	}
@@ -194,19 +211,19 @@ public class AdventureMain {
 		}
 		return jam;
 	}
-	
+
 	public static int intCheck(int options) {
 		int selection;
 		do {
-		    while (!userInput.hasNextInt()) {
-		        System.out.println("Please enter an integer value.");
-		        userInput.nextLine(); 
-		    }
-		    selection = userInput.nextInt();
-		    if (selection > options || selection < 1) {
-		    	System.out.println("Please enter a valid choice.");
-		    	userInput.nextLine(); 
-		    }
+			while (!userInput.hasNextInt()) {
+				System.out.println("Please enter an integer value.");
+				userInput.nextLine();
+			}
+			selection = userInput.nextInt();
+			if (selection > options || selection < 1) {
+				System.out.println("Please enter a valid choice.");
+				userInput.nextLine();
+			}
 		} while (selection > options || selection < 1);
 		userInput.nextLine();
 		return selection;
