@@ -110,7 +110,7 @@ public class AdventureMain {
 			player.pickup("Axe");
 			System.out.println("The axe is light and sharp. Although old, it should come in handy. Obtained +1 Axe!");
 			System.out.println("You head for the exit with your new choice of weapon.\n");
-			// b3();
+			b3();
 		}
 		else if (choice == 2) {
 			System.out.println("Any of the items could probably be sold for a nice profit, but you have a mission to complete...\n");
@@ -150,6 +150,23 @@ public class AdventureMain {
 		}
 		System.out.println("On the way out, you manage to strip the monster of a red key. It looks useful.");
 		player.pickup("red key");
+		// c2();
+	}
+	
+	public static void b3() {
+		String guess;
+		System.out.println("As you enter the next room, you feel a sense of danger. The room is completely empty, with a massive steel door blocking your next move.");
+		System.out.println("You try the door... but it's locked solid. Suddenly, you hear a raspy voice coming in from all around.");
+		System.out.println("Creepy Voice: Hello " + player.getName() + ". I'm going to have to stop you right here. To get past, you must solve the following riddle:");
+		System.out.println("What has a head and a tail, but no body? A _______.");
+		guess = userInput.nextLine();
+		while ((!guess.equals("Coin")) && !guess.equals("coin")) {
+			System.out.println("Please try again.");
+			guess = userInput.nextLine();
+		}
+		System.out.println("Creepy Voice: Correct! You may pass.");
+		System.out.println("The steel door unlocks and your journey continues forward.");
+		// c2();
 	}
 
 	public static int attackMonster(String weapon, int health, String description) {
