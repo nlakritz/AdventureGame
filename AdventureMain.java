@@ -67,9 +67,9 @@ public class AdventureMain {
 			player.decreaseHealth(3);
 		}
 		System.out.println("The monster has dropped a blue key!");
-		System.out.println("You have acquired a blue key and now proceed through the door...");
+		System.out.println("You have acquired a blue key and now proceed through the door...\n");
 		player.pickup("blue key");
-		// b1()
+		b1();
 	}
 
 	public static void a2() {
@@ -116,6 +116,23 @@ public class AdventureMain {
 			System.out.println("Any of the items could probably be sold for a nice profit, but you have a mission to complete...\n");
 			a3();
 		}
+	}
+	
+	public static void b1() {
+		System.out.println("You appear to have found the kitchen. However, all the food is gone except for a single loaf of moldy bread.");
+		System.out.println("1: Take the bread");
+		System.out.println("2: Look around");
+		choice = intCheck(2);
+		if (choice == 1) {
+			System.out.println("You take the stale bread, and proceed through to the next room. Obtained +1 Bread!\n");
+			player.pickup("Bread");
+			// c1();
+		}
+		else if (choice == 2) {
+			System.out.println("All the dishes are stashed away nicely. Everything seems to be inactive.\n");
+			b1();
+		}
+			
 	}
 
 	public static void b2() {
@@ -168,6 +185,7 @@ public class AdventureMain {
 		System.out.println("The steel door unlocks and your journey continues forward.");
 		// c2();
 	}
+	
 
 	public static int attackMonster(String weapon, int health, String description) {
 		int damage = 0;
