@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Character {
 	private String name;
@@ -64,6 +63,11 @@ public class Character {
 				increaseHealth(1);
 				drop("Bandage"); // Consumable items must be removed from inventory after use.
 				hand = temp;
+			} else if (hand.equals("Bread")) {
+				System.out.println("You have used [Bread] to recover 2 HP.");
+				increaseHealth(2);
+				drop("Bread");
+				hand = temp;
 			} else if (hand.equals("Stew")) {
 				System.out.println("You have used [Stew] to recover 3 HP.");
 				increaseHealth(3);
@@ -86,24 +90,23 @@ public class Character {
 		Scanner revivechoice = new Scanner(System.in);
 		for (String iterate : pack) {
 			if (iterate.equals("Kiss of Life")) {
-					System.out.print("You have a revive item. Use it? (Y/N) ");
-					while (true) {
-						String choice = revivechoice.nextLine();
-						if (choice.equals("Y")) {
-							System.out.println("You have been resurrected!");
-							revivechoice.close();
-							return false;
-						} else if (choice.equals("N")) {
-							System.out.println("You have died. GAME OVER.");
-							revivechoice.close();
-							return true;
-						}
-						else {
-							System.out.print("That is not a valid answer. Please try again. ");
-						}
+				System.out.print("You have a revive item. Use it? (Y/N) ");
+				while (true) {
+					String choice = revivechoice.nextLine();
+					if (choice.equals("Y")) {
+						System.out.println("You have been resurrected!");
+						revivechoice.close();
+						return false;
+					} else if (choice.equals("N")) {
+						System.out.println("You have died. GAME OVER.");
+						revivechoice.close();
+						return true;
+					} else {
+						System.out.print("That is not a valid answer. Please try again. ");
 					}
 				}
 			}
+		}
 		System.out.println("You have died. GAME OVER.");
 		revivechoice.close();
 		return true;

@@ -3,7 +3,6 @@ import java.util.*;
 public class Monster {
 	private static ArrayList<Integer> arr = new ArrayList<Integer>();
 	private int health;
-	private static int counter = 0;
 	public boolean alive = true;
 
 	public Monster() {
