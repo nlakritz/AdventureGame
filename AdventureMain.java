@@ -126,7 +126,7 @@ public class AdventureMain {
 		if (choice == 1) {
 			System.out.println("You take the stale bread, and proceed through to the next room. Obtained +1 Bread!\n");
 			player.pickup("Bread");
-			// c1();
+			c1();
 		}
 		else if (choice == 2) {
 			System.out.println("All the dishes are stashed away nicely. Everything seems to be inactive.\n");
@@ -186,6 +186,30 @@ public class AdventureMain {
 		// c2();
 	}
 	
+	public static void c1() {
+		Scanner lightchoice = new Scanner(System.in);	
+		System.out.println("Everything is pitch black... Equip your flashlight? (Y/N)");
+		while (true) {
+			String c = lightchoice.nextLine();
+			if (c.equals("Y")) {
+				player.equip("Flashlight");
+				break;
+			} else if (c.equals("N")) {
+				break;
+			} else {
+				System.out.print("That is not a valid answer. Please try again.\n");
+			}
+		}
+		if (player.getHand().equals("Flashlight")) {
+			System.out.println("Your flashlight illuminates the room. You see a black key on the ground and pick it up. Nothing else seems to be here, so you move ahead.\nObtained +1 Black Key!");
+			lightchoice.close();
+			// d1();
+		}
+		else if (!player.getHand().equals("Flashlight")) {
+			System.out.println("You need some light to proceed.\n");
+			c1();
+		}
+	}
 
 	public static int attackMonster(String weapon, int health, String description) {
 		int damage = 0;
