@@ -7,6 +7,13 @@ public class Character {
 	private String hand = "Nothing";
 	ArrayList<String> pack = new ArrayList<String>(10);
 
+	public Character() {
+		maxhealth = 10;
+		health = 10;
+		pack.add("Bandage");
+		pack.add("Flashlight");
+	}
+
 	public void setName(String playerName) {
 		name = playerName;
 	}
@@ -110,12 +117,5 @@ public class Character {
 		System.out.println("You have died. GAME OVER.");
 		revivechoice.close();
 		return true;
-	}
-
-	public Character() {
-		maxhealth = 10;
-		health = 10;
-		pack.add("Bandage");
-		pack.add("Flashlight");
 	}
 }
