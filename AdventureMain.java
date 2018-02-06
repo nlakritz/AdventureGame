@@ -53,7 +53,7 @@ public class AdventureMain {
 		if (choice == 1) {
 			while (jam.checkLife()) {
 				if (choice == 1) {
-					jam.setHealth(attackMonster(player.getHand(), jam.getHealth(), jam.bodyPart()));
+					jam.setHealth(player.attack(player.getHand(), jam.getHealth(), jam.bodyPart()));
 					if (jam.getHealth() > 0) {
 						System.out.println("The monster has " + jam.getHealth() + " health left");
 					} else {
@@ -147,7 +147,7 @@ public class AdventureMain {
 		if (choice == 1) {
 			while (speedy.checkLife()) {
 				if (choice == 1) {
-					speedy.setHealth(attackMonster(player.getHand(), speedy.getHealth(), speedy.bodyPart()));
+					speedy.setHealth(player.attack(player.getHand(), speedy.getHealth(), speedy.bodyPart()));
 					if (speedy.getHealth() > 0) {
 						System.out.println("The monster has " + speedy.getHealth() + " health left");
 					} else {
@@ -167,7 +167,9 @@ public class AdventureMain {
 		}
 		System.out.println("On the way out, you manage to strip the monster of a red key. It looks useful.");
 		player.pickup("red key");
-		// c2();
+		player.pickup("black key");
+		player.pickup("blue key");
+		stackRoom();
 	}
 	
 	public static void b3() {
@@ -210,74 +212,56 @@ public class AdventureMain {
 			c1();
 		}
 	}
-
-	public static int attackMonster(String weapon, int health, String description) {
-		int damage = 0;
-		if (weapon.equals("Nothing")) {
-			if (description.equals("left head") || description.equals("middle head")
-					|| description.equals("right head")) {
-				damage = 2;
-				health -= 2;
-			} else {
-				damage = 1;
-				health -= 1;
+	
+	public static void stackRoom() {
+		Scanner keyChoice= new Scanner(System.in);	
+		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> backup = new ArrayList<String>();
+		System.out.println("To place a key type ( ___key) and when you are finished type (done) ");
+		String answer = "";
+		while(!answer.equals("done")) {
+			answer = keyChoice.nextLine();
+			if(answer.equals("done")) {
+				break;
+			}else if(!player.pack.contains(answer) ) {  // to check if player has said item
+				System.out.println("You do not have this item");
+				break;
 			}
-		} else if (weapon.equals("Butter Knife")) {
-			if (description.equals("left head") || description.equals("middle head")
-					|| description.equals("right head")) {
-				damage = 3;
-				health -= 3;
-			} else {
-				damage = 2;
-				health -= 2;
-			}
-		} else if (weapon.equals("Axe")) {
-			if (description.equals("left head") || description.equals("middle head")
-					|| description.equals("right head")) {
-				damage = 4;
-				health -= 4;
-			} else {
-				damage = 3;
-				health -= 3;
-			}
+			temp.add(answer);
+			backup.add(answer);    // in case he doesn't have all the keys and i need to put keys back in the pack
+			player.pack.remove(answer);  // removes keys from bag
 		}
-		System.out.println("You have cut off the monsters " + description + " and done " + damage + " damage");
-		return health;
+		if(temp.size()!= 3) {  // checks if he has right number of keys, if not puts keys back in bag
+			player.pack.addAll(backup);
+			System.out.println("You do not have enough keys, come back when you have found them all");
+			// go somehwere else
+		}
+		stackGame(temp);
 	}
 
-	public static ArrayList<String> stack_game(ArrayList<String> jam) {
+	public static boolean stackGame(ArrayList<String> jam) {
 		ArrayList<String> temp = new ArrayList<String>();
-		String[] arr = new String[5];
-		String[] ans = { "red", "green", "blue", "yellow", "black" };
-		System.out.println("You will need the following items: blue, red, green, yellow, black");
-		System.out.println("if you do not have these items then leave");
-		System.out.println("To place block type place (item)");
-
+		String[] arr = new String[3];
+		String[] ans = { "blue key", "red key", "black key" };
 		Stack puzzle = new Stack();
-		while (userInput.hasNextLine()) {
-			String item = userInput.nextLine();
-			if (!jam.contains(item) && !item.equals("q")) {
-				System.out.println("You don't have this item");
-				continue;
-			} else {
-				jam.remove(item);
-			}
-			if (item.equals("q")) {
-				break;
-			} else {
-				puzzle.push(item);
-			}
+		int n = 0;
+		while (n < 3) {
+			puzzle.push(jam.get(n));
+			n++;
 		}
 		System.out.println(puzzle);
-		for (int i = 0; i < 5; i++) {
-			if (!puzzle.isEmpty() && !ans[i].equals((String) puzzle.pop())) {
+		for (int i = 0; i < 3; i++) {
+			String answ = (String) puzzle.pop();
+			puzzle.push(answ);
+			System.out.println("The first thing popped is " + answ);
+			if (ans[i].equals((String) puzzle.pop())) {
 				System.out.println("Not correct order try Again!!");
 				puzzle.clear();
-				break;
+				return false;
 			}
 			System.out.println("Correct");
 		}
-		return jam;
+		return true;
 	}
 
 	public static int intCheck(int options) {
