@@ -111,15 +111,16 @@ public class AdventureMain {
 			System.out.println("The axe is light and sharp. Although old, it should come in handy. Obtained +1 Axe!");
 			System.out.println("You head for the exit with your new choice of weapon.\n");
 			b3();
-		}
-		else if (choice == 2) {
-			System.out.println("Any of the items could probably be sold for a nice profit, but you have a mission to complete...\n");
+		} else if (choice == 2) {
+			System.out.println(
+					"Any of the items could probably be sold for a nice profit, but you have a mission to complete...\n");
 			a3();
 		}
 	}
-	
+
 	public static void b1() {
-		System.out.println("You appear to have found the kitchen. However, all the food is gone except for a single loaf of moldy bread.");
+		System.out.println(
+				"You appear to have found the kitchen. However, all the food is gone except for a single loaf of moldy bread.");
 		System.out.println("1: Take the bread");
 		System.out.println("2: Look around");
 		choice = intCheck(2);
@@ -127,12 +128,11 @@ public class AdventureMain {
 			System.out.println("You take the stale bread, and proceed through to the next room. Obtained +1 Bread!\n");
 			player.pickup("Bread");
 			c1();
-		}
-		else if (choice == 2) {
+		} else if (choice == 2) {
 			System.out.println("All the dishes are stashed away nicely. Everything seems to be inactive.\n");
 			b1();
 		}
-			
+
 	}
 
 	public static void b2() {
@@ -171,12 +171,15 @@ public class AdventureMain {
 		player.pickup("blue key");
 		stackRoom();
 	}
-	
+
 	public static void b3() {
 		String guess;
-		System.out.println("As you enter the next room, you feel a sense of danger. The room is completely empty, with a massive steel door blocking your next move.");
-		System.out.println("You try the door... but it's locked solid. Suddenly, you hear a raspy voice coming in from all around.");
-		System.out.println("Creepy Voice: Hello " + player.getName() + ". I'm going to have to stop you right here. To get past, you must solve the following riddle:");
+		System.out.println(
+				"As you enter the next room, you feel a sense of danger. The room is completely empty, with a massive steel door blocking your next move.");
+		System.out.println(
+				"You try the door... but it's locked solid. Suddenly, you hear a raspy voice coming in from all around.");
+		System.out.println("Creepy Voice: Hello " + player.getName()
+				+ ". I'm going to have to stop you right here. To get past, you must solve the following riddle:");
 		System.out.println("What has a head and a tail, but no body? A _______.");
 		guess = userInput.nextLine();
 		while ((!guess.equals("Coin")) && !guess.equals("coin")) {
@@ -187,9 +190,9 @@ public class AdventureMain {
 		System.out.println("The steel door unlocks and your journey continues forward.");
 		// c2();
 	}
-	
+
 	public static void c1() {
-		Scanner lightchoice = new Scanner(System.in);	
+		Scanner lightchoice = new Scanner(System.in);
 		System.out.println("Everything is pitch black... Equip your flashlight? (Y/N)");
 		while (true) {
 			String c = lightchoice.nextLine();
@@ -203,42 +206,46 @@ public class AdventureMain {
 			}
 		}
 		if (player.getHand().equals("Flashlight")) {
-			System.out.println("Your flashlight illuminates the room. You see a black key on the ground and pick it up. Nothing else seems to be here, so you move ahead.\nObtained +1 Black Key!");
+			System.out.println(
+					"Your flashlight illuminates the room. You see a black key on the ground and pick it up. Nothing else seems to be here, so you move ahead.\nObtained +1 Black Key!");
 			lightchoice.close();
 			// d1();
-		}
-		else if (!player.getHand().equals("Flashlight")) {
+		} else if (!player.getHand().equals("Flashlight")) {
 			System.out.println("You need some light to proceed.\n");
 			c1();
 		}
 	}
-	
+
 	public static void stackRoom() {
-		Scanner keyChoice= new Scanner(System.in);	
+		Scanner keyChoice = new Scanner(System.in);
 		ArrayList<String> temp = new ArrayList<String>();
 		ArrayList<String> backup = new ArrayList<String>();
 		System.out.println("To place a key type ( ___key) and when you are finished type (done) ");
 		String answer = "";
-		while(!answer.equals("done")) {
+		while (!answer.equals("done")) {
 			answer = keyChoice.nextLine();
-			if(answer.equals("done")) {
+			if (answer.equals("done")) {
 				break;
-			}else if(!player.pack.contains(answer) ) {  // to check if player has said item
+			} else if (!player.pack.contains(answer)) { // to check if player has said item
 				System.out.println("You do not have this item");
 				break;
 			}
 			temp.add(answer);
-			backup.add(answer);    // in case he doesn't have all the keys and i need to put keys back in the pack
-			player.pack.remove(answer);  // removes keys from bag
+			backup.add(answer); // in case he doesn't have all the keys and i need to put keys back in the pack
+			player.pack.remove(answer); // removes keys from bag
 		}
-		if(temp.size()!= 3) {  // checks if he has right number of keys, if not puts keys back in bag
+		if (temp.size() != 3) { // checks if he has right number of keys, if not puts keys back in bag
 			player.pack.addAll(backup);
 			System.out.println("You do not have enough keys, come back when you have found them all");
-			// go somehwere else
+			home();
 		}
 		stackGame(temp);
 	}
 
+	public static void home() {
+		System.out.println("You are home");
+	}
+ 
 	public static boolean stackGame(ArrayList<String> jam) {
 		ArrayList<String> temp = new ArrayList<String>();
 		String[] arr = new String[3];
@@ -251,10 +258,7 @@ public class AdventureMain {
 		}
 		System.out.println(puzzle);
 		for (int i = 0; i < 3; i++) {
-			String answ = (String) puzzle.pop();
-			puzzle.push(answ);
-			System.out.println("The first thing popped is " + answ);
-			if (ans[i].equals((String) puzzle.pop())) {
+			if (!ans[i].equals((String) puzzle.pop())) {
 				System.out.println("Not correct order try Again!!");
 				puzzle.clear();
 				return false;
@@ -262,6 +266,30 @@ public class AdventureMain {
 			System.out.println("Correct");
 		}
 		return true;
+	}
+
+	public static void endGame() {
+		System.out.println("You enter a bedroom and see the most beautiful woman you will ever lay eyes on in your entire life and those to come.");
+		System.out.println("She's laying down on the bed not making a noise.");
+		System.out.println("You try and get her attention but nothing seems to work so you walk closer now");
+		System.out.println("Now by the bedside, you realize that she isn't sleeping, she's dead.");
+		System.out.println("If you still have the revive potion you can use it here. (Y/N)");
+		String choice = userInput.nextLine();
+		if (choice.equals("Y")) {
+			if (player.pack.contains("revive potion")) {
+				player.pack.remove("revive potion");
+				System.out.println("She opens her eyes and looks around. You are stunned by her beautiful blue eyes. After regaining your composure you"
+						+ " explain what has happened. She stands up and you both walk out of the mansion");
+				System.out.println("Congratulations you have won the game");
+			}
+		} else if (choice.equals("Y")) {
+			if (!player.pack.contains("revive potion")) {
+				System.out.println("You don't have the revive potion. If you have used it the game is over. You couldn't save Taylor.");
+			}
+		} else if (choice.equals("N")) {
+			System.out.println("You couldn't save Taylor and have failed the mission." );
+		}
+
 	}
 
 	public static int intCheck(int options) {
