@@ -52,15 +52,13 @@ public class AdventureMain {
 		choice = intCheck(2);
 		if (choice == 1) {
 			while (jam.checkLife()) {
-				if (choice == 1) {
-					jam.setHealth(player.attack(player.getHand(), jam.getHealth(), jam.bodyPart()));
-					if (jam.getHealth() > 0) {
-						System.out.println("The monster has " + jam.getHealth() + " health left");
-					} else {
-						System.out.println("The monster has 0 health left\n");
-					}
-					player.decreaseHealth(1);
+				jam.setHealth(player.attack(player.getHand(), jam.getHealth(), jam.bodyPart()));
+				if (jam.getHealth() > 0) {
+					System.out.println("The monster has " + jam.getHealth() + " health left");
+				} else {
+					System.out.println("The monster has 0 health left\n");
 				}
+				player.decreaseHealth(1);
 			}
 		} else if (choice == 2) {
 			System.out.println("As you run pass the monster it swipes at you, gashing your back.");
@@ -146,15 +144,13 @@ public class AdventureMain {
 		choice = intCheck(2);
 		if (choice == 1) {
 			while (speedy.checkLife()) {
-				if (choice == 1) {
-					speedy.setHealth(player.attack(player.getHand(), speedy.getHealth(), speedy.bodyPart()));
-					if (speedy.getHealth() > 0) {
-						System.out.println("The monster has " + speedy.getHealth() + " health left");
-					} else {
-						System.out.println("The monster has 0 health left");
-					}
-					player.decreaseHealth(1);
+				speedy.setHealth(player.attack(player.getHand(), speedy.getHealth(), speedy.bodyPart()));
+				if (speedy.getHealth() > 0) {
+					System.out.println("The monster has " + speedy.getHealth() + " health left");
+				} else {
+					System.out.println("The monster has 0 health left");
 				}
+				player.decreaseHealth(1);
 			}
 		} else if (choice == 2) {
 			if (escape == 2) {
@@ -165,11 +161,9 @@ public class AdventureMain {
 				player.decreaseHealth(4);
 			}
 		}
-		System.out.println("On the way out, you manage to strip the monster of a red key. It looks useful.");
+		System.out.println("On the way out, you manage to strip the monster of a red key. It looks useful.\n");
 		player.pickup("red key");
-		player.pickup("black key");
-		player.pickup("blue key");
-		stackRoom();
+		c2();
 	}
 
 	public static void b3() {
@@ -187,8 +181,8 @@ public class AdventureMain {
 			guess = userInput.nextLine();
 		}
 		System.out.println("Creepy Voice: Correct! You may pass.");
-		System.out.println("The steel door unlocks and your journey continues forward.");
-		// c2();
+		System.out.println("The steel door unlocks and your journey continues forward.\n");
+		c2();
 	}
 
 	public static void c1() {
@@ -207,12 +201,56 @@ public class AdventureMain {
 		}
 		if (player.getHand().equals("Flashlight")) {
 			System.out.println(
-					"Your flashlight illuminates the room. You see a black key on the ground and pick it up. Nothing else seems to be here, so you move ahead.\nObtained +1 Black Key!");
+					"Your flashlight illuminates the room. You see a black key on the ground and pick it up. Nothing else seems to be here, so you move ahead.");
 			lightchoice.close();
+			player.pickup("black key");
 			// d1();
 		} else if (!player.getHand().equals("Flashlight")) {
 			System.out.println("You need some light to proceed.\n");
 			c1();
+		}
+	}
+	
+	public static void c2() {
+		Monster giant = new Monster(6);
+		System.out.println("A giant monster awaits you, stronger than any you have faced previously. Your weapon upgrades and consumables will be needed here.");
+		System.out.println("1: Engage in battle");
+		System.out.println("2: Run past your opponent and escape");
+		choice = intCheck(2);
+		if (choice == 1) {
+			while (giant.checkLife()) {
+				giant.setHealth(player.attack(player.getHand(), giant.getHealth(), giant.bodyPart()));
+				if (giant.getHealth() > 0) {
+					System.out.println("The monster has " + giant.getHealth() + " health left");
+				} else {
+					System.out.println("The monster has 0 health left");
+				}
+				player.decreaseHealth(1);
+			}
+		}
+		else if (choice == 2) {
+			System.out.println("You try and sidestep the monster, but it's just too large. There's no running from this one... COMBAT PHASE INITATE!");
+			while (giant.checkLife()) {
+				giant.setHealth(player.attack(player.getHand(), giant.getHealth(), giant.bodyPart()));
+				if (giant.getHealth() > 0) {
+					System.out.println("The monster has " + giant.getHealth() + " health left");
+				} else {
+					System.out.println("The monster has 0 health left");
+				}
+				player.decreaseHealth(1);
+			}		
+		}
+		System.out.println("Defeated, the monster hands you a green key before disintegrating into dust.\n");
+		player.pickup("green key");
+		System.out.println("There are two ways to exit this room. Choose one.");
+		System.out.println("1. Go left");
+		System.out.println("2. Go right");
+		choice = intCheck(2);
+		if (choice == 1) {
+			//d2();
+		}
+		else if (choice == 2) {
+			//d3();
 		}
 	}
 
