@@ -35,7 +35,9 @@ public class Character {
 	public void decreaseHealth(int damage) {
 		health -= damage;
 		if (health <= 0) {
-			death();
+			if (death()) {
+				System.exit(0);
+			}
 		}
 	}
 
@@ -92,7 +94,7 @@ public class Character {
 	public void status() {
 		System.out.println("You have " + health + " health left and are holding [" + hand + "].");
 	}
-	
+
 	public static int attack(String weapon, int health, String description) {
 		int damage = 0;
 		if (weapon.equals("Nothing")) {
