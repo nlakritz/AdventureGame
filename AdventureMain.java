@@ -277,7 +277,10 @@ public class AdventureMain {
 			System.out.println("You do not have enough keys, come back when you have found them all");
 			home();
 		}
-		stackGame(temp);
+		boolean ans = stackGame(temp);
+		if(ans) {
+			endGame();
+		}
 	}
 
 	public static void home() {
@@ -288,7 +291,7 @@ public class AdventureMain {
 		ArrayList<String> temp = new ArrayList<String>();
 		String[] arr = new String[3];
 		String[] ans = { "blue key", "red key", "black key" };
-		Stack puzzle = new Stack();
+		Stack puzzle = new Stack(); 
 		int n = 0;
 		while (n < 3) {
 			puzzle.push(jam.get(n));
@@ -322,7 +325,7 @@ public class AdventureMain {
 			}
 		} else if (choice.equals("Y")) {
 			if (!player.pack.contains("revive potion")) {
-				System.out.println("You don't have the revive potion. If you have used it the game is over. You couldn't save Taylor.");
+				System.out.println("You don't have the revive potion. If you have used it you can't save Taylor and the game is over. You couldn't save Taylor.");
 			}
 		} else if (choice.equals("N")) {
 			System.out.println("You couldn't save Taylor and have failed the mission." );
