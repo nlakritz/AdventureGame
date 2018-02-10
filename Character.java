@@ -95,7 +95,7 @@ public class Character {
 		System.out.println("You have " + health + " health left and are holding [" + hand + "].");
 	}
 
-	public static int attack(String weapon, int health, String description) {
+	public int attack(String weapon, int health, String description) {
 		int damage = 0;
 		if (weapon.equals("Nothing")) {
 			if (description.equals("left head") || description.equals("middle head")
