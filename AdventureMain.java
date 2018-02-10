@@ -186,10 +186,9 @@ public class AdventureMain {
 	}
 
 	public static void c1() {
-		Scanner lightchoice = new Scanner(System.in);
 		System.out.println("Everything is pitch black... Equip your flashlight? (Y/N)");
 		while (true) {
-			String c = lightchoice.nextLine();
+			String c = userInput.nextLine();
 			if (c.equals("Y")) {
 				player.equip("Flashlight");
 				break;
@@ -202,9 +201,8 @@ public class AdventureMain {
 		if (player.getHand().equals("Flashlight")) {
 			System.out.println(
 					"Your flashlight illuminates the room. You see a black key on the ground and pick it up. Nothing else seems to be here, so you move ahead.");
-			lightchoice.close();
 			player.pickup("black key");
-			// d1();
+			d1();
 		} else if (!player.getHand().equals("Flashlight")) {
 			System.out.println("You need some light to proceed.\n");
 			c1();
@@ -252,6 +250,25 @@ public class AdventureMain {
 		else if (choice == 2) {
 			//d3();
 		}
+	}
+	
+	public static void d1() {
+		Monster enemy = new Monster(5);
+		System.out.println("As soon as you open the door, you are challenged by another monster. You don't have time to do anything but fight back.");
+		System.out.println("1: Engage in battle");
+		choice = intCheck(1);
+		while (enemy.checkLife()) {
+			enemy.setHealth(player.attack(player.getHand(), enemy.getHealth(), enemy.bodyPart()));
+			if (enemy.getHealth() > 0) {
+				System.out.println("The monster has " + enemy.getHealth() + " health left");
+			} else {
+				System.out.println("The monster has 0 health left");
+			}
+			player.decreaseHealth(1);
+		}
+		System.out.println("The monster vaporizes into thin air, leaving a yellow key in its place.\n");
+		player.pickup("yellow key");
+		stackRoom();
 	}
 
 	public static void stackRoom() {
