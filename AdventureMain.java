@@ -246,7 +246,7 @@ public class AdventureMain {
 			d2();
 		}
 		else if (choice == 2) {
-			//d3();
+			d3();
 		}
 	}
 	
@@ -282,11 +282,33 @@ public class AdventureMain {
 		}
 		stackRoom();
 	}
+	
+	public static void d3() {
+		System.out.println("It looks like you're in some sort of lab. There are three vials of different colored liquid on a shelf.");
+		System.out.println("1. Drink the red liquid");
+		System.out.println("2. Drink the blue liquid");
+		System.out.println("3. Drink the black liquid");
+		choice = intCheck(3);
+		if (choice == 1) {
+			System.out.println("The taste the red liquid and instantly feel stronger, so you save it for later. Obtained +1 Health Potion!");
+			player.pickup("Health Potion");
+		}
+		else if (choice == 2) {
+			System.out.println("You taste the blue liquid, and feel nothing. You drink the whole thing and still feel nothing.");
+		}
+		else if (choice == 3) {
+			System.out.println("Drinking the black liquid sends a shiver down your spine. You drink some more and feel sick.");
+			player.decreaseHealth(2);
+		}
+		System.out.println("You leave the lab room.\n");
+		stackRoom();
+	}
 
 	public static void stackRoom() {
 		Scanner keyChoice = new Scanner(System.in);
 		ArrayList<String> temp = new ArrayList<String>();
 		ArrayList<String> backup = new ArrayList<String>();
+		System.out.println("You have entered the puzzle room!");
 		System.out.println("To place a key type ( ___key) and when you are finished type (done) ");
 		String answer = "";
 		while (!answer.equals("done")) {
