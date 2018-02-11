@@ -82,10 +82,10 @@ public class Character {
 				increaseHealth(3);
 				drop("Stew");
 				hand = temp;
-			} else if (hand.equals("Super Healing Potion")) {
-				System.out.println("You have used [Super Healing Potion] to recover all HP.");
-				health = maxhealth;
-				drop("Super Healing Potion");
+			} else if (hand.equals("Healing Potion")) {
+				System.out.println("You have used [Healing Potion] to recover half your max HP.");
+				health = maxhealth/2;
+				drop("Healing Potion");
 				hand = temp;
 			}
 		}
