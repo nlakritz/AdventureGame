@@ -99,21 +99,20 @@ public class AdventureMain {
 	}
 
 	public static void a3() {
-		System.out.println(
-				"You survey a large hallway -- its walls are lined with aging artifacts.\nA rusty hatchet stands out among rows of old ornaments and documents.");
+		System.out.println("You survey a large hallway -- its walls are lined with aging artifacts.\nA rusty hatchet stands out among rows of old ornaments and documents.");
 		System.out.println("1: Take the axe");
 		System.out.println("2: Look around");
 		choice = intCheck(2);
-		if (choice == 1) {
-			player.pickup("Axe");
-			System.out.println("The axe is light and sharp. Although old, it should come in handy. Obtained +1 Axe!");
-			System.out.println("You head for the exit with your new choice of weapon.\n");
-			b3();
-		} else if (choice == 2) {
-			System.out.println(
-					"Any of the items could probably be sold for a nice profit, but you have a mission to complete...\n");
-			a3();
+		while (choice != 1) {
+			System.out.println("Any of the items could probably be sold for a nice profit, but you have a mission to complete...\n");
+			System.out.println("1: Take the axe");
+			System.out.println("2: Look around");
+			choice = intCheck(2);
 		}
+		player.pickup("Axe");
+		System.out.println("The axe is light and sharp. Although old, it should come in handy. Obtained +1 Axe!");
+		System.out.println("You head for the exit with your new choice of weapon.\n");
+		b3();
 	}
 
 	public static void b1() {
@@ -130,7 +129,6 @@ public class AdventureMain {
 			System.out.println("All the dishes are stashed away nicely. Everything seems to be inactive.\n");
 			b1();
 		}
-
 	}
 
 	public static void b2() {
@@ -245,7 +243,7 @@ public class AdventureMain {
 		System.out.println("2. Go right");
 		choice = intCheck(2);
 		if (choice == 1) {
-			//d2();
+			d2();
 		}
 		else if (choice == 2) {
 			//d3();
@@ -268,6 +266,20 @@ public class AdventureMain {
 		}
 		System.out.println("The monster vaporizes into thin air, leaving a yellow key in its place.\n");
 		player.pickup("yellow key");
+		stackRoom();
+	}
+	
+	public static void d2() {
+		System.out.println("There actually isn't anything in this room. I guess the game developers ran out of ideas.");
+		System.out.println("1. Leave");
+		System.out.println("2. Stare at wall");
+		choice = intCheck(2);
+		while (choice != 1) {
+			System.out.println("You stare at the wall. Seriously, there isn't anything else to do here.\n");
+			System.out.println("1. Leave");
+			System.out.println("2. Continue to stare at wall");
+			choice = intCheck(2);
+		}
 		stackRoom();
 	}
 
