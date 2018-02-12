@@ -309,33 +309,33 @@ public class AdventureMain {
 		ArrayList<String> temp = new ArrayList<String>();
 		ArrayList<String> backup = new ArrayList<String>();
 		System.out.println("You have entered the puzzle room!");
-		System.out.println("To place a key type ( ___key) and when you are finished type (done) ");
+		System.out.println("To place a key, enter its color. When you are finished type (done)");
 		String answer = "";
 		while (!answer.equals("done")) {
 			answer = keyChoice.nextLine();
 			if (answer.equals("done")) {
 				break;
-			} else if (!player.pack.contains(answer)) { // to check if player has said item
-				System.out.println("You do not have this item");
+			} else if (!player.pack.contains(answer + " key")) { // to check if player has said item
+				System.out.println("You do not have this key.");
 				break;
 			}
-			temp.add(answer);
 			backup.add(answer); // in case he doesn't have all the keys and i need to put keys back in the pack
 			player.pack.remove(answer); // removes keys from bag
 		}
-		if (temp.size() != 3) { // checks if he has right number of keys, if not puts keys back in bag
+		if (backup.size() != 5) { // checks if he has right number of keys, if not puts keys back in bag
 			player.pack.addAll(backup);
-			System.out.println("You do not have enough keys, come back when you have found them all");
+			System.out.println("You do not have all the keys, come back when you have found them all.");
 			home();
 		}
-		boolean ans = stackGame(temp);
-		if(ans) {
+		if(stackGame(backup)) {
+			keyChoice.close();
 			endGame();
 		}
 	}
 
 	public static void home() {
-		System.out.println("You are home");
+		System.out.println("You have been teleported back to the lobby.\n");
+		lobby();
 	}
  
 	public static boolean stackGame(ArrayList<String> jam) {
